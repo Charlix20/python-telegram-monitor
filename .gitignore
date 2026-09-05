@@ -1,0 +1,9 @@
+# Archivo de memoria local
+ultima_cita.txt
+
+# Archivo de variables de entorno (si usas .env)
+.env
+
+# Caché de Python
+__pycache__/
+*.pyc
