@@ -1,0 +1,29 @@
+name: Steam Monitor Automation
+
+on:
+  schedule:
+    # Se ejecuta automáticamente cada hora
+    - cron: '0 * * * *'
+  workflow_dispatch: # Permite probarlo manualmente desde GitHub
+
+jobs:
+  run-monitor:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Instalar dependencias
+        run: pip install requests
+
+      - name: Ejecutar script de monitoreo
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+        run: python monitor.py
